@@ -2,6 +2,4 @@
 ============
 
 Test edit by Jake
-
-Hello World!
-Added by Nathan
+Test edit by Jon
