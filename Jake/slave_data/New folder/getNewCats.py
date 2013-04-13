@@ -14,17 +14,20 @@ def file_exists(filename):
         return False
 
 
-
+all_files = []
 bus1 = []
 bus2 = []
 per1 = []
 per2 = []
-# group1[b] = {}
-# group1[p] = {}
-# group2[b] = {}
-# group2[p] = {}
-# correct[b] = {}
-# correct[p] = {}
+group1 = {}
+group2 = {}
+correct = {}
+group1['b'] = {}
+group1['p'] = {}
+group2['b'] = {}
+group2['p'] = {}
+correct['b'] = {}
+correct['p'] = {}
 
     
 for dirname, dirnames, filenames in os.walk('.'):
@@ -36,28 +39,34 @@ for dirname, dirnames, filenames in os.walk('.'):
     # editing the 'dirnames' list will stop os.walk() from recursing into there.
     if '.git' in dirnames:
         # don't go into any .git directories.
-        dirnames.remove('.git')   
-    else:
-        print dirname 
-    # elif 'business1' or 'business2' in dirnames:
-        # bus1.append(filenames)
-    # elif 'business3' or 'business4' in dirnames:
-        # bus2.append(dirname)
-    # elif 'personal1' or 'personal2' in dirnames:
-        # per1.append(dirname)
-    # elif 'personal3' or 'personal4' in dirnames:
-        # per2.append(dirname)   
+        dirnames.remove('.git')    
     
-    # print path to all filenames.
     for filename in filenames:
         if ('.py' not in filename) and ('.DS_Store' not in filename):
-            pass    
-        
-        
-        
-            #all_files.append(os.path.join(dirname, filename))
-            #print os.path.join(dirname, filename)    
+            all_files.append(os.path.join(dirname, filename))
+            #print os.path.join(dirname, filename)  
 
+for file in all_files:    
+    if 'business1' in file:
+        bus1.append(file)
+    elif 'business2' in file:
+        bus1.append(file)
+    elif 'business3' in file:
+        bus2.append(file)
+    elif 'business4' in file:
+        bus2.append(file)
+    elif 'personal1' in file:
+        per1.append(file)
+    elif 'personal2' in file:
+        per1.append(file)        
+    elif 'personal3' in file:
+        per2.append(file)  
+    elif 'personal4' in file:
+        per2.append(file)            
+            
+pprint.pprint(bus1)            
+pprint.pprint(per2)            
+            
 count = 1    
 errors = []        
 # for file in all_files:
