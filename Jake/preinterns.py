@@ -12,19 +12,19 @@ import os
 fname_out = "outdata\\"
 
 
-classified = {}
+# classified = {}
 
 
-f = open('cats.txt', 'r')
-for line in f:
-    path_cat = line.split()
-    label = path_cat[1]
-    subpaths = path_cat[0].split('\\')
-    file = subpaths[2]
-    file = file.replace('.cats','.txt')
-    classified[file] = label
+# f = open('cats.txt', 'r')
+# for line in f:
+    # path_cat = line.split()
+    # label = path_cat[1]
+    # subpaths = path_cat[0].split('\\')
+    # file = subpaths[2]
+    # file = file.replace('.cats','.txt')
+    # classified[file] = label
     
-pprint.pprint(classified)
+# pprint.pprint(classified)
 
 
 ## check if file exists
