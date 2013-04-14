@@ -14,7 +14,7 @@ def file_exists(filename):
         return False
 
 
-all_files = []
+all_files = {}
 bus1 = []
 bus2 = []
 per1 = []
@@ -43,29 +43,36 @@ for dirname, dirnames, filenames in os.walk('.'):
     
     for filename in filenames:
         if ('.py' not in filename) and ('.DS_Store' not in filename):
-            all_files.append(os.path.join(dirname, filename))
+            #all_files.append(os.path.join(dirname, filename))
+            if filename not in all_files:
+                all_files[filename] = dirname
+            else:
+                temp_str = "," + dirname
+                all_files[filename] += temp_str
             #print os.path.join(dirname, filename)  
-
-for file in all_files:    
-    if 'business1' in file:
-        bus1.append(file)
-    elif 'business2' in file:
-        bus1.append(file)
-    elif 'business3' in file:
-        bus2.append(file)
-    elif 'business4' in file:
-        bus2.append(file)
-    elif 'personal1' in file:
-        per1.append(file)
-    elif 'personal2' in file:
-        per1.append(file)        
-    elif 'personal3' in file:
-        per2.append(file)  
-    elif 'personal4' in file:
-        per2.append(file)            
             
-pprint.pprint(bus1)            
-pprint.pprint(per2)            
+pprint.pprint(all_files)            
+
+# for file, path in all_files:    
+    # if 'business1' in file:
+        # bus1.append(file)
+    # elif 'business2' in file:
+        # bus1.append(file)
+    # elif 'business3' in file:
+        # bus2.append(file)
+    # elif 'business4' in file:
+        # bus2.append(file)
+    # elif 'personal1' in file:
+        # per1.append(file)
+    # elif 'personal2' in file:
+        # per1.append(file)        
+    # elif 'personal3' in file:
+        # per2.append(file)  
+    # elif 'personal4' in file:
+        # per2.append(file)            
+            
+# pprint.pprint(bus1)            
+# pprint.pprint(per2)            
             
 count = 1    
 errors = []        
