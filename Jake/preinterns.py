@@ -11,6 +11,22 @@ import os
 # my_range = 898
 fname_out = "outdata\\"
 
+
+classified = {}
+
+
+f = open('cats.txt', 'r')
+for line in f:
+    path_cat = line.split()
+    label = path_cat[1]
+    subpaths = path_cat[0].split('\\')
+    file = subpaths[2]
+    file = file.replace('.cats','.txt')
+    classified[file] = label
+    
+pprint.pprint(classified)
+
+
 ## check if file exists
 def file_exists(filename):
     if os.path.isfile(filename):
@@ -58,56 +74,30 @@ def get_email_body(filename):
 
 all_files = []    
     
-for dirname, dirnames, filenames in os.walk('.'):
-    # print path to all subdirectories first.
-    # for subdirname in dirnames:
-        # print os.path.join(dirname, subdirname)         
+# for dirname, dirnames, filenames in os.walk('.'):
+    # if '.git' in dirnames:
+        # dirnames.remove('.git')    
+    
+    # for filename in filenames:
+        # if ('.py' not in filename) and ('.txt' not in filename):
+            # all_files.append(os.path.join(dirname, filename))   
 
-    # Advanced usage:
-    # editing the 'dirnames' list will stop os.walk() from recursing into there.
-    if '.git' in dirnames:
-        # don't go into any .git directories.
-        dirnames.remove('.git')    
-    
-    # print path to all filenames.
-    for filename in filenames:
-        if ('.py' not in filename) and ('.txt' not in filename):
-            all_files.append(os.path.join(dirname, filename))
-            #print os.path.join(dirname, filename)    
-
-count = 1    
-errors = []        
-for file in all_files:
-    try:
-        data = get_email_body(file)    
-        f_out = open(fname_out + str(count) + '.txt', 'w')
-        f_out.write('\n\nEmail Message:\n\n' + data + '\n\nFileName' + file)
-        f_out.close()
-    except Exception as error:
-        errors.append(file)
-    count += 1
-
-    
-    
-    
-### old way     
-    
-## create a list of filenames ranging from 0 to myrange   
-# files = [i for i in range(1,my_range)]
-# errors = []
-# for filenum in files:
+# count = 1    
+# errors = []        
+# for file in all_files:
     # try:
-        # data = get_email_body(fname_in + str(filenum))    
-        # f_out = open(fname_out + str(filenum) + '.txt', 'w')
-        # f_out.write('\n\nEmail Message:\n\n' + data)
+        # data = get_email_body(file)    
+        # f_out = open(fname_out + str(count) + '.txt', 'w')
+        # f_out.write('\n\nEmail Message:\n\n' + data + '\n\nFileName' + file)
         # f_out.close()
     # except Exception as error:
-        # pass
-        
-        # errors.append("couldnt open: " + str(filenum))
-        # 'file_exists' funct will print out bad file names
-        
-#pprint.pprint(errors)
+        # errors.append(file)
+    # count += 1
+
+    
+    
+    
+
 
 
     
