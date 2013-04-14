@@ -15,20 +15,10 @@ def file_exists(filename):
 
 
 all_files = {}
-bus1 = []
-bus2 = []
-per1 = []
-per2 = []
-group1 = {}
-group2 = {}
-correct = {}
-group1['b'] = {}
-group1['p'] = {}
-group2['b'] = {}
-group2['p'] = {}
-correct['b'] = {}
-correct['p'] = {}
-
+files_classified = {}
+files_classified['bus'] = []
+files_classified['pers'] = []
+files_classified['unknown'] = []
     
 for dirname, dirnames, filenames in os.walk('.'):
     # print path to all subdirectories first.
@@ -51,29 +41,25 @@ for dirname, dirnames, filenames in os.walk('.'):
                 all_files[filename] += temp_str
             #print os.path.join(dirname, filename)  
             
-pprint.pprint(all_files)            
+            
 
-# for file, path in all_files:    
-    # if 'business1' in file:
-        # bus1.append(file)
-    # elif 'business2' in file:
-        # bus1.append(file)
-    # elif 'business3' in file:
-        # bus2.append(file)
-    # elif 'business4' in file:
-        # bus2.append(file)
-    # elif 'personal1' in file:
-        # per1.append(file)
-    # elif 'personal2' in file:
-        # per1.append(file)        
-    # elif 'personal3' in file:
-        # per2.append(file)  
-    # elif 'personal4' in file:
-        # per2.append(file)            
-            
-# pprint.pprint(bus1)            
-# pprint.pprint(per2)            
-            
+for file, tags in all_files.iteritems():
+    list = tags.split(',')
+    if (len(list) > 1):
+        if ('business' in list[0]) and ('business' in list[1]):
+            files_classified['bus'].append(file) 
+        elif ('personal' in list[0]) and ('personal' in list[1]):
+            files_classified['pers'].append(file)     
+        else:
+            files_classified['unknown'].append(file)   
+    else:
+        files_classified['unknown'].append(file)  
+           
+pprint.pprint(files_classified)
+print 'bus', len(files_classified['bus'])
+print 'pers', len(files_classified['pers'])
+print 'unknown', len(files_classified['unknown'])
+           
 count = 1    
 errors = []        
 # for file in all_files:
