@@ -161,6 +161,7 @@ for file in all_files:
 
     
 output_str = ",".join(output) 
+output_str = output_str.replace("\n,", "\n")
 f = open(outfile, 'w')
 f.write(output_str)
 f.close()
