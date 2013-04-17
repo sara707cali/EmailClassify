@@ -4,8 +4,10 @@ Created on Apr 14, 2013
 @author: ongnathan
 '''
 
-MASTER_LIST_FILE = 'masterlist.txt'
-ARFF_FILE = 'emailClassification.arff'
+from os import listdir
+
+MASTER_LIST_FILE = 'masterlist_names_10count_lem.txt'
+ARFF_FILE = 'header_names_10count_lem.arff'
 NUMERIC = True
 masterList = []
 
@@ -20,16 +22,21 @@ def inputMasterList(masterListFileName):
     masterList = sorted(masterList)
     masterFile.close()
 
-def makeARFFHeader(masterListFileName, arffOutputFileName):
+def makeARFFHeader(masterListFileName, arffOutputFileName, isNumeric):
     inputMasterList(masterListFileName)
     filename = ARFF_FILE if arffOutputFileName == None else arffOutputFileName
     arffFile = open(filename, 'w')
     arffFile.write('@RELATION emailClassification\n\n')
     for word in masterList:
-        arffFile.write('@ATTRIBUTE ' + word + (' NUMERIC' if NUMERIC else ' {y,n}') + '\n')
-    arffFile.write('@ATTRIBUTE class {business, personal}\n')
+        arffFile.write('@ATTRIBUTE ' + word + (' NUMERIC' if isNumeric else ' {y,n}') + '\n')
+    arffFile.write('@ATTRIBUTE CLASS_LABEL {business, personal}\n\n@DATA\n')
     arffFile.flush()
     arffFile.close()
+    
+def makeAllMasterLists():
+    for filename in listdir("."):
+        if "masterlist" in filename:
+            makeARFFHeader(filename, filename[:-3]+"arff", ("count" in filename))
 
 if __name__ == "__main__":
-    makeARFFHeader(None, None)
+    makeAllMasterLists()
