@@ -19,6 +19,10 @@ complete_vocab = {}
 complete_bigrams = {}
 names_lower = []
 masterlist_file = 'masterlist.txt'
+stop = True
+count = True
+lem = True
+stem = True
 #bigrams_file = 'bigrams.txt'
 
 ## check if file exists
@@ -46,10 +50,19 @@ def master_list(data):
     
     
     for word in format_data:
-        if word not in stopwords.words('english'):
+        if (stop):
+            if word not in stopwords.words('english'):
+                if word not in names_lower:
+                    if (lem):
+                        no_stop_words.append(l.lemmatize(word))
+                    else:
+                        no_stop_words.append(word)
+        else:
             if word not in names_lower:
-                #no_stop_words.append(l.lemmatize(word))
-                no_stop_words.append(word)
+                if (lem):
+                    no_stop_words.append(l.lemmatize(word))
+                else:
+                    no_stop_words.append(word)
             
     for element in no_stop_words:
         if(element not in complete_vocab):

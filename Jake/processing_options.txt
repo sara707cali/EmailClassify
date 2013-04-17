@@ -1,0 +1,7 @@
+
+WILL HAVE 12 MASTER LISTS!
+
+count, boolean
+stopwords, no stopwords
+lem, stem, none
+
