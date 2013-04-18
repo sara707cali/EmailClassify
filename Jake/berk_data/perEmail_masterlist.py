@@ -16,10 +16,13 @@ from copy import deepcopy
 
 complete_vocab = {}
 init_to_zero_vocab = {}
-masterlist_file = 'masterlist_stopwords_names_10count_lem.txt'
-outfile = 'weka_masterlist_stopwords_names_10count_lem.txt'
+masterlist_file = 'masterlist_count_nostop_none.txt'
+outfile = 'weka_masterlist_count_nostop_none.txt'
+stop = False
+count = True
+lem = False
+stem = True
 output = []
-
 
 ## check if file exists
 def file_exists(filename):
@@ -63,8 +66,17 @@ def single_master_list(data):
     no_stop_words = []
     l = WordNetLemmatizer()
     for word in format_data:
-        if word not in stopwords.words('english'):
-            no_stop_words.append(l.lemmatize(word))
+        if (stop):
+            if word not in stopwords.words('english'):
+                if (lem):
+                    no_stop_words.append(l.lemmatize(word))
+                else:
+                    no_stop_words.append(word)
+        else:
+            if (lem):
+                no_stop_words.append(l.lemmatize(word))
+            else:
+                no_stop_words.append(word)
             
     for element in no_stop_words:
         if(element in my_vocab):
