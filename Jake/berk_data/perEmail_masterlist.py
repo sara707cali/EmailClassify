@@ -16,12 +16,10 @@ from copy import deepcopy
 
 complete_vocab = {}
 init_to_zero_vocab = {}
-masterlist_file = 'masterlist_count_nostop_none.txt'
-outfile = 'weka_masterlist_count_nostop_none.txt'
+masterlist_file = 'spellcheck_masterlist_nolemma_stop.txt'
+outfile = 'weka_masterlist_count_stop_nolem_spellcheck.txt'
 stop = False
-count = True
-lem = False
-stem = True
+lem = True
 output = []
 
 ## check if file exists

@@ -2,9 +2,16 @@ import pprint
 
 m_lists = [
 'weka_masterlist_count_stop_lem.txt',
-'weka_masterlist_count_stop_none.txt',
+'weka_masterlist_count_stop_nolem.txt',
 'weka_masterlist_count_nostop_lem.txt',
-'weka_masterlist_count_nostop_none.txt'
+'weka_masterlist_count_nostop_nolem.txt'
+]
+
+m_lists2 = [
+'weka_masterlist_count_stop_lem_spellcheck.txt',
+'weka_masterlist_count_stop_nolem_spellcheck.txt',
+'weka_masterlist_count_nostop_lem_spellcheck.txt',
+'weka_masterlist_count_nostop_nolem_spellcheck.txt'
 ]
 
 def to_bool_str(file):
@@ -27,7 +34,7 @@ def to_bool_str(file):
     f.close()  
     return file_content
     
-for m_file in m_lists:
+for m_file in m_lists2:
     this_list = to_bool_str(m_file)
     f_out =  f = open(m_file.replace("count","bool"), 'w')
     f_out.write(this_list)
